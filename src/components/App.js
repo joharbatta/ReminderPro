@@ -14,14 +14,32 @@ class App extends Component {
   }
   addReminderr=()=>
   {
-    console.log(this);
+    // console.log(this);
     this.props.addReminder(this.state.text);
+  }
+  renderReminder()
+  {
+    const {reminderzz}=this.props;
+
+    return(
+      <ul className="list-group col-sm-4">
+      {
+        reminderzz.map(reminder=>{
+          return(
+            <li key={reminder.id} className="list-group-item">
+            <div>{reminder.text}</div>
+            </li>
+          )
+        })
+      }
+      </ul>
+    )
   }
 
   render()
   {
-    console.log(this.props);
-
+    // console.log(this.props);
+    
     return (
       <div className="App">
         <div className="title">
@@ -35,13 +53,14 @@ class App extends Component {
           onChange={this.update}
           />
         </div>
-
+     
         <button
           type="button"
           className="btn btn-success"
           onClick={this.addReminderr}
           >Add Reminder</button>
         </div>
+        {this.renderReminder()}
       </div>
     )
   }
@@ -50,7 +69,7 @@ class App extends Component {
 function mapStateToProps(state)
 {
   return{
-    reminders:state,
+    reminderzz:state,
   }
 }
 export default connect(mapStateToProps,{addReminder})(App);
